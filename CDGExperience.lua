@@ -49,18 +49,18 @@ function CDGExperience_ExperienceUpdate(eventCode,unitTag,currentExp,maxExp,reas
 		return 
 	end
 	local XPgain = currentExp - CDGExperience.currentXP
-	d(string.format("Gained %d XP from %s[%d]", XPgain, XPReasonToString(reason),reason))
+	d(string.format("XP UPD : Gained %d XP from %s[%d]", XPgain, XPReasonToString(reason),reason))
 	CDGExperience.currentXP = currentExp
 end
 
 function CDGExperience_QuestCompleteExperience(eventCode, questName, xpGained)
-	d(string.format("Gained %d XP from Quest %s",xpGained, questName))
+	d(string.format("XP QCE : Gained %d XP from Quest %s",xpGained, questName))
 end
 
 function CDGExperience_ExperienceGain(eventCode, value, reason)
-	d(string.format("Gained %d XP from %s[%d]",value, XPReasonToString(reason),reason))
+	d(string.format("XP GAIN : Gained %d XP from %s[%d]",value, XPReasonToString(reason),reason))
 end
 
 function CDGExperience_ExperienceGainDiscovery(eventCode, areaName, value)
-	d(string.format("Gained %d Discover XP from %s",value, areaName))
+	d(string.format("XP DISC : Gained %d Discover XP from %s",value, areaName))
 end
