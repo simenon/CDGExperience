@@ -7,9 +7,9 @@ function CDGExperience_OnInitialized()
 end
 
 function CDGExperience_ExperienceGain(value, reason)
-	p(string.format("Gained %d XP from %d",value, reason))
+	d(string.format("Gained %d XP from %d",value, reason))
 end
 
 function CDGExperience_ExperienceGainDiscovery(value, areaName)
-	p(string.format("Gained %d Discover XP from %s",value, areaName))
+	d(string.format("Gained %d Discover XP from %s",value, areaName))
 end
