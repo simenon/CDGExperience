@@ -1,7 +1,13 @@
+CDGExperience = {}
+CDGExperience.currentXP = 0
+
 function CDGExperience_OnInitialized()
+	CDGExperience.currentXP = GetUnitXP('player')
 	--	EVENT_QUEST_COMPLETE_EXPERIENCE (string questName, integer xpGained)
 	--	EVENT_EXPERIENCE_GAIN (integer value, integer reason)
 --EVENT_EXPERIENCE_GAIN_DISCOVERY (string areaName, integer value)
+	EVENT_MANAGER:RegisterForEvent("CDGExperience",EVENT_EXPERIENCE_UPDATE, CDGExperience_ExperienceUpdate)
+	EVENT_MANAGER:RegisterForEvent("CDGExperience",EVENT_QUEST_COMPLETE_EXPERIENCE, CDGExperience_QuestCompleteExperience)
 	EVENT_MANAGER:RegisterForEvent("CDGExperience",EVENT_EXPERIENCE_GAIN, CDGExperience_ExperienceGain)
 	EVENT_MANAGER:RegisterForEvent("CDGExperience",EVENT_EXPERIENCE_GAIN_DISCOVERY,CDGExperience_ExperienceGainDiscovery )
 end
@@ -38,11 +44,23 @@ function XPReasonToString(reason)
 	return sReason
 end
 
-function CDGExperience_ExperienceGain(value, reason)
-	
-	d(string.format("Gained %d XP from %s",value, XPReasonToString(reason)))
+function CDGExperience_ExperienceUpdate(eventCode,unitTag,currentExp,maxExp,reason)
+	if ( unitTag ~= 'player' ) then 
+		return 
+	end
+	local XPgain = currentExp - CDGExperience.currentXP
+	d(string.format("Gained %d XP from %s[%d]", XPgain, XPReasonToString(reason),reason))
+	CDGExperience.currentXP = currentExp
 end
 
-function CDGExperience_ExperienceGainDiscovery(areaName, value)
+function CDGExperience_QuestCompleteExperience(eventCode, questName, xpGained)
+	d(string.format("Gained %d XP from Quest %s",xpGained, questName))
+end
+
+function CDGExperience_ExperienceGain(eventCode, value, reason)
+	d(string.format("Gained %d XP from %s[%d]",value, XPReasonToString(reason),reason))
+end
+
+function CDGExperience_ExperienceGainDiscovery(eventCode, areaName, value)
 	d(string.format("Gained %d Discover XP from %s",value, areaName))
 end
