@@ -17,6 +17,8 @@ function CDGExperience_OnInitialized()
 	CDGExperience.currentXP = GetUnitXP('player')
 	
 	for _, tradeSkillType in ipairs(CRAFTING_TYPES) do
+		if not CDGExperience.craft then CDGExperience.craft = {} end
+		if not CDGExperience.craft.currentXP then CDGExperience.craft.currentXP = {} end
 		if not CDGExperience.craft.currentXP[tradeSkillType] then CDGExperience.craft.currentXP[tradeSkillType] = {} end
 
 		skillType, skillIndex = GetCraftingSkillLineIndices(tradeSkillType)
