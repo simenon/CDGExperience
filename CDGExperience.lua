@@ -57,7 +57,7 @@ function CDGExperience_ExperienceUpdate(eventCode,unitTag,currentExp,maxExp,reas
 end
 
 function CDGExperience_SkillXPUpdate(eventCode, skillType, skillIndex, oldXP, maxXP, newXP)
-	d(string.format("type %d index %d minXP %d maxXP %d newXP %d"))
+	d(string.format("type %d index %d minXP %d maxXP %d newXP %d",skillType,skillIndex,oldXP,maxXP,newXP))
 end
 
 function CDGExperience_QuestCompleteExperience(eventCode, questName, xpGained)
