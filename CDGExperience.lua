@@ -4,6 +4,7 @@ CDGExperience.currentXP = 0
 function CDGExperience_OnInitialized()
 	CDGExperience.currentXP = GetUnitXP('player')
 	
+	EVENT_MANAGER:RegisterForEvent("CDGExperience",EVENT_SKILL_XP_UPDATE, CDGExperience_SkillXPUpdate)
 	EVENT_MANAGER:RegisterForEvent("CDGExperience",EVENT_EXPERIENCE_UPDATE, CDGExperience_ExperienceUpdate)
 	EVENT_MANAGER:RegisterForEvent("CDGExperience",EVENT_QUEST_COMPLETE_EXPERIENCE, CDGExperience_QuestCompleteExperience)
 --	EVENT_MANAGER:RegisterForEvent("CDGExperience",EVENT_EXPERIENCE_GAIN, CDGExperience_ExperienceGain)
@@ -53,6 +54,10 @@ function CDGExperience_ExperienceUpdate(eventCode,unitTag,currentExp,maxExp,reas
 	end
 
 	CDGExperience.currentXP = currentExp
+end
+
+function CDGExperience_SkillXPUpdate(eventCode, skillType, skillIndex, oldXP, maxXP, newXP)
+	d(string.format("type %d index %d minXP %d maxXP %d newXP %d"))
 end
 
 function CDGExperience_QuestCompleteExperience(eventCode, questName, xpGained)
