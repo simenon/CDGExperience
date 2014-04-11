@@ -80,12 +80,13 @@ function CDGExperience_SkillXPUpdate(eventCode, skillType, skillIndex, oldXP, ma
 			local XPgain = newXP - CDGExperience.craft.currentXP[tradeSkillType]
 			d(string.format("Gained %d crafting XP",XPgain))
 			CDGExperience.craft.currentXP[tradeSkillType] = newXP
-		end if
+		end
 	
 	end
 
 	d(string.format("type %d index %d minXP %d maxXP %d newXP %d",skillType,skillIndex,oldXP,maxXP,newXP))
 	d(string.format("Gained %d inspiration",GetLastCraftingResultTotalInspiration)
+
 end
 
 function CDGExperience_QuestCompleteExperience(eventCode, questName, xpGained)
