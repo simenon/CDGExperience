@@ -1,8 +1,23 @@
 CDGExperience = {}
 CDGExperience.currentXP = 0
+CDGExperience.tradeSkillType = { 
+	CRAFTING_TYPE_ALCHEMY,
+	CRAFTING_TYPE_BLACKSMITHING,
+	CRAFTING_TYPE_CLOTHIER,
+	CRAFTING_TYPE_ENCHANTING,
+	CRAFTING_TYPE_PROVISIONING,
+	CRAFTING_TYPE_WOODWORKING }
+
 
 function CDGExperience_OnInitialized()
 	CDGExperience.currentXP = GetUnitXP('player')
+	
+  _, _, CDGExperience.craft.currentXP[CRAFTING_TYPE_ALCHEMY] = GetSkillLineXPInfo(GetCraftingSkillLineIndices(CRAFTING_TYPE_ALCHEMY))
+  _, _, CDGExperience.craft.currentXP[CRAFTING_TYPE_BLACKSMITHING] = GetSkillLineXPInfo(GetCraftingSkillLineIndices(CRAFTING_TYPE_BLACKSMITHING))
+  _, _, CDGExperience.craft.currentXP[CRAFTING_TYPE_CLOTHIER] = GetSkillLineXPInfo(GetCraftingSkillLineIndices(CRAFTING_TYPE_CLOTHIER))
+  _, _, CDGExperience.craft.currentXP[CRAFTING_TYPE_ENCHANTING] = GetSkillLineXPInfo(GetCraftingSkillLineIndices(CRAFTING_TYPE_ENCHANTING))
+  _, _, CDGExperience.craft.currentXP[CRAFTING_TYPE_PROVISIONING] = GetSkillLineXPInfo(GetCraftingSkillLineIndices(CRAFTING_TYPE_PROVISIONING))
+  _, _, CDGExperience.craft.currentXP[CRAFTING_TYPE_WOODWORKING] = GetSkillLineXPInfo(GetCraftingSkillLineIndices(CRAFTING_TYPE_WOODWORKING))
 	
 	EVENT_MANAGER:RegisterForEvent("CDGExperience",EVENT_SKILL_XP_UPDATE, CDGExperience_SkillXPUpdate)
 	EVENT_MANAGER:RegisterForEvent("CDGExperience",EVENT_EXPERIENCE_UPDATE, CDGExperience_ExperienceUpdate)
@@ -57,7 +72,20 @@ function CDGExperience_ExperienceUpdate(eventCode,unitTag,currentExp,maxExp,reas
 end
 
 function CDGExperience_SkillXPUpdate(eventCode, skillType, skillIndex, oldXP, maxXP, newXP)
+
+	for _, tradeSkillType in ipairs(CDGExperience.tradeSkillType) do
+
+		sType, sIndex = GetCraftingSkillLineIndices(tradeSkillType)
+		if sType == skillType and sIndex == skillIndex then
+			local XPgain = newXP - CDGExperience.craft.currentXP[tradeSkillType]
+			d(string.format("Gained %d crafting XP",XPgain))
+			CDGExperience.craft.currentXP[tradeSkillType] = newXP
+		end if
+	
+	end
+
 	d(string.format("type %d index %d minXP %d maxXP %d newXP %d",skillType,skillIndex,oldXP,maxXP,newXP))
+	d(string.format("Gained %d inspiration",GetLastCraftingResultTotalInspiration)
 end
 
 function CDGExperience_QuestCompleteExperience(eventCode, questName, xpGained)
