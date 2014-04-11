@@ -40,11 +40,11 @@ function XPReasonToString(reason)
 	elseif reason == XP_REASON_DISCOVER_POI then sReason = "for discovering POI"
 	elseif reason == XP_REASON_FINESSE then sReason = "XP_REASON_FINESSE"
 	elseif reason == XP_REASON_KEEP_REWARD then sReason = "XP_REASON_KEEP"
-	elseif reason == XP_REASON_KILL then sReason = "for killing"
+	elseif reason == XP_REASON_KILL then sReason = "for killing a mob"
 	elseif reason == XP_REASON_LOCK_PICK then sReason = "XP_REASON_LOCK_PICK"
 	elseif reason == XP_REASON_MEDAL then sReason = "XP_REASON_MEDAL"
 	elseif reason == XP_REASON_NONE then sReason = "XP_REASON_NONE"
-	elseif reason == XP_REASON_OVERLAND_BOSS_KILL then sReason = "for killing overland boss"
+	elseif reason == XP_REASON_OVERLAND_BOSS_KILL then sReason = "for killing an overland boss"
 	elseif reason == XP_REASON_QUEST then sReason = "XP_REASON_QUEST"
 	elseif reason == XP_REASON_REWARD then sReason = "XP_REASON_REWARD"
 	elseif reason == XP_REASON_SCRIPTED_EVENT then sReason = "XP_REASON_SCRIPTED_EVENT"
@@ -69,7 +69,7 @@ function CDGExperience_ExperienceUpdate(eventCode,unitTag,currentExp,maxExp,reas
 	
 	if reason ~= XP_REASON_DISCOVER_POI then
 		local XPgain = currentExp - CDGExperience.currentXP
-		d(string.format("Gained %d XP %s ", XPgain, XPReasonToString(reason)))
+		d(string.format("%d XP gained %s ", XPgain, XPReasonToString(reason)))
 	end
 
 	CDGExperience.currentXP = currentExp
@@ -82,7 +82,7 @@ function CDGExperience_SkillXPUpdate(eventCode, skillType, skillIndex, oldXP, ma
 		sType, sIndex = GetCraftingSkillLineIndices(tradeSkillType)
 		if sType == skillType and sIndex == skillIndex then
 			local XPgain = newXP - CDGExperience.craft.currentXP[tradeSkillType]
-			d(string.format("Gained %d crafting XP",XPgain))
+			d(string.format("%d crafting XP gained",XPgain))
 			CDGExperience.craft.currentXP[tradeSkillType] = newXP
 		end
 	
@@ -99,5 +99,5 @@ end
 --end
 
 function CDGExperience_ExperienceGainDiscovery(eventCode, areaName, value)
-	d(string.format("XP DISC : Gained %d Discover XP from %s",value, areaName))
+	d(string.format("%d XP gained for discovering %s",value, areaName))
 end
