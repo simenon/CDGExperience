@@ -17,8 +17,8 @@ function CDGExperience_OnInitialized()
 	CDGExperience.currentXP = GetUnitXP('player')
 	
 	for _, tradeSkillType in ipairs(CRAFTING_TYPES) do
-		if not CDGExperience.craft then CDGExperience.craft = {} end
-		if not CDGExperience.craft.currentXP then CDGExperience.craft.currentXP = {} end
+--		if not CDGExperience.craft then CDGExperience.craft = {} end
+--		if not CDGExperience.craft.currentXP then CDGExperience.craft.currentXP = {} end
 		if not CDGExperience.craft.currentXP[tradeSkillType] then CDGExperience.craft.currentXP[tradeSkillType] = {} end
 
 		skillType, skillIndex = GetCraftingSkillLineIndices(tradeSkillType)
@@ -89,9 +89,6 @@ function CDGExperience_SkillXPUpdate(eventCode, skillType, skillIndex, oldXP, ma
 		end
 	
 	end
-
-	d(string.format("type %d index %d minXP %d maxXP %d newXP %d",skillType,skillIndex,oldXP,maxXP,newXP))
-	d(string.format("Gained %d inspiration",GetLastCraftingResultTotalInspiration))
 
 end
 
