@@ -85,7 +85,7 @@ function CDGExperience_SkillXPUpdate(eventCode, skillType, skillIndex, oldXP, ma
 	end
 
 	d(string.format("type %d index %d minXP %d maxXP %d newXP %d",skillType,skillIndex,oldXP,maxXP,newXP))
-	d(string.format("Gained %d inspiration",GetLastCraftingResultTotalInspiration)
+	d(string.format("Gained %d inspiration",GetLastCraftingResultTotalInspiration))
 
 end
 
