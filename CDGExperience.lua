@@ -1,4 +1,5 @@
 CDGExperience = {}
+CDGExperience.craft = {}
 CDGExperience.currentXP = 0
 CDGExperience.tradeSkillType = { 
 	CRAFTING_TYPE_ALCHEMY,
@@ -11,13 +12,10 @@ CDGExperience.tradeSkillType = {
 
 function CDGExperience_OnInitialized()
 	CDGExperience.currentXP = GetUnitXP('player')
-	
-  _, _, CDGExperience.craft.currentXP[CRAFTING_TYPE_ALCHEMY] = GetSkillLineXPInfo(GetCraftingSkillLineIndices(CRAFTING_TYPE_ALCHEMY))
-  _, _, CDGExperience.craft.currentXP[CRAFTING_TYPE_BLACKSMITHING] = GetSkillLineXPInfo(GetCraftingSkillLineIndices(CRAFTING_TYPE_BLACKSMITHING))
-  _, _, CDGExperience.craft.currentXP[CRAFTING_TYPE_CLOTHIER] = GetSkillLineXPInfo(GetCraftingSkillLineIndices(CRAFTING_TYPE_CLOTHIER))
-  _, _, CDGExperience.craft.currentXP[CRAFTING_TYPE_ENCHANTING] = GetSkillLineXPInfo(GetCraftingSkillLineIndices(CRAFTING_TYPE_ENCHANTING))
-  _, _, CDGExperience.craft.currentXP[CRAFTING_TYPE_PROVISIONING] = GetSkillLineXPInfo(GetCraftingSkillLineIndices(CRAFTING_TYPE_PROVISIONING))
-  _, _, CDGExperience.craft.currentXP[CRAFTING_TYPE_WOODWORKING] = GetSkillLineXPInfo(GetCraftingSkillLineIndices(CRAFTING_TYPE_WOODWORKING))
+
+	for _, tradeSkillType in ipairs(CDGExperience.tradeSkillType) do
+	  _, _, CDGExperience.craft.currentXP[tradeSkillType] = GetSkillLineXPInfo(GetCraftingSkillLineIndices(tradeSkillType))
+	end
 	
 	EVENT_MANAGER:RegisterForEvent("CDGExperience",EVENT_SKILL_XP_UPDATE, CDGExperience_SkillXPUpdate)
 	EVENT_MANAGER:RegisterForEvent("CDGExperience",EVENT_EXPERIENCE_UPDATE, CDGExperience_ExperienceUpdate)
