@@ -36,15 +36,15 @@ function XPReasonToString(reason)
 	elseif reason == XP_REASON_BATTLEGROUND then sReason = "XP_REASON_BATTLEGROUND"
 	elseif reason == XP_REASON_COLLECT_BOOK then sReason = "XP_REASON_COLLECT_BOOK"
 	elseif reason == XP_REASON_COMMAND then sReason = "XP_REASON_COMMAND"
-	elseif reason == XP_REASON_COMPLETE_POI then sReason = "XP_REASON_COMPLETE_POI"
-	elseif reason == XP_REASON_DISCOVER_POI then sReason = "XP_REASON_DISCOVER_POI"
+	elseif reason == XP_REASON_COMPLETE_POI then sReason = "for completing POI"
+	elseif reason == XP_REASON_DISCOVER_POI then sReason = "for discovering POI"
 	elseif reason == XP_REASON_FINESSE then sReason = "XP_REASON_FINESSE"
 	elseif reason == XP_REASON_KEEP_REWARD then sReason = "XP_REASON_KEEP"
-	elseif reason == XP_REASON_KILL then sReason = "XP_REASON_KILL"
+	elseif reason == XP_REASON_KILL then sReason = "for killing"
 	elseif reason == XP_REASON_LOCK_PICK then sReason = "XP_REASON_LOCK_PICK"
 	elseif reason == XP_REASON_MEDAL then sReason = "XP_REASON_MEDAL"
 	elseif reason == XP_REASON_NONE then sReason = "XP_REASON_NONE"
-	elseif reason == XP_REASON_OVERLAND_BOSS_KILL then sReason = "XP_REASON_OVERLAND_BOSS_KILL"
+	elseif reason == XP_REASON_OVERLAND_BOSS_KILL then sReason = "for killing overland boss"
 	elseif reason == XP_REASON_QUEST then sReason = "XP_REASON_QUEST"
 	elseif reason == XP_REASON_REWARD then sReason = "XP_REASON_REWARD"
 	elseif reason == XP_REASON_SCRIPTED_EVENT then sReason = "XP_REASON_SCRIPTED_EVENT"
@@ -69,7 +69,7 @@ function CDGExperience_ExperienceUpdate(eventCode,unitTag,currentExp,maxExp,reas
 	
 	if reason ~= XP_REASON_DISCOVER_POI then
 		local XPgain = currentExp - CDGExperience.currentXP
-		d(string.format("Gained %d XP from %s [%d]", XPgain, XPReasonToString(reason),reason))
+		d(string.format("Gained %d XP %s ", XPgain, XPReasonToString(reason)))
 	end
 
 	CDGExperience.currentXP = currentExp
