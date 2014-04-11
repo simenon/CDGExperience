@@ -1,5 +1,7 @@
 CDGExperience = {}
 CDGExperience.craft = {}
+CDGExperience.craft.currentXP = {}
+
 CDGExperience.currentXP = 0
 
 CRAFTING_TYPES = { 
