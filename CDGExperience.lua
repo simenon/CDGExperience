@@ -1,7 +1,8 @@
 CDGExperience = {}
 CDGExperience.craft = {}
 CDGExperience.currentXP = 0
-CDGExperience.tradeSkillType = { 
+
+CRAFTING_TYPES = { 
 	CRAFTING_TYPE_ALCHEMY,
 	CRAFTING_TYPE_BLACKSMITHING,
 	CRAFTING_TYPE_CLOTHIER,
@@ -13,7 +14,7 @@ CDGExperience.tradeSkillType = {
 function CDGExperience_OnInitialized()
 	CDGExperience.currentXP = GetUnitXP('player')
 
-	for _, tradeSkillType in ipairs(CDGExperience.tradeSkillType) do
+	for _, tradeSkillType in ipairs(CRAFTING_TYPES) do
 	  _, _, CDGExperience.craft.currentXP[tradeSkillType] = GetSkillLineXPInfo(GetCraftingSkillLineIndices(tradeSkillType))
 	end
 	
@@ -71,7 +72,7 @@ end
 
 function CDGExperience_SkillXPUpdate(eventCode, skillType, skillIndex, oldXP, maxXP, newXP)
 
-	for _, tradeSkillType in ipairs(CDGExperience.tradeSkillType) do
+	for _, tradeSkillType in ipairs(CRAFTING_TYPES) do
 
 		sType, sIndex = GetCraftingSkillLineIndices(tradeSkillType)
 		if sType == skillType and sIndex == skillIndex then
