@@ -67,7 +67,8 @@ function CDGExperience_ExperienceUpdate(eventCode,unitTag,currentExp,maxExp,reas
 		return 
 	end
 	
-	if reason ~= XP_REASON_DISCOVER_POI then
+	if reason ~= XP_REASON_DISCOVER_POI and
+		 reason ~= XP_REASON_QUEST then
 		local XPgain = currentExp - CDGExperience.currentXP
 		d(string.format("%d XP gained %s ", XPgain, XPReasonToString(reason)))
 	end
@@ -91,7 +92,7 @@ function CDGExperience_SkillXPUpdate(eventCode, skillType, skillIndex, oldXP, ma
 end
 
 function CDGExperience_QuestCompleteExperience(eventCode, questName, xpGained)
-	d(string.format("XP QCE : Gained %d XP from Quest %s",xpGained, questName))
+	d(string.format("%d XP gained for completing %s",xpGained, questName))
 end
 
 --function CDGExperience_ExperienceGain(eventCode, value, reason)
