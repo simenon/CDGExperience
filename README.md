@@ -1,1 +1,2 @@
-CDGExperience is an Elder Scrolls Online addon that shows experience gains
+# CDGExperience
+CDGExperience is a very basic Elder Scrolls Online addon that shows experience gains in your chat window.
