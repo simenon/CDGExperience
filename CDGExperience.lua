@@ -17,7 +17,8 @@ function CDGExperience_OnInitialized()
 	CDGExperience.currentXP = GetUnitXP('player')
 
 	for _, tradeSkillType in ipairs(CRAFTING_TYPES) do
-	  _, _, CDGExperience.craft.currentXP[tradeSkillType] = GetSkillLineXPInfo(GetCraftingSkillLineIndices(tradeSkillType))
+		skillType, skillIndex = GetCraftingSkillLineIndices(tradeSkillType)
+	  _, _, CDGExperience.craft.currentXP[tradeSkillType] = GetSkillLineXPInfo(skillType, skillIndex)
 	end
 	
 	EVENT_MANAGER:RegisterForEvent("CDGExperience",EVENT_SKILL_XP_UPDATE, CDGExperience_SkillXPUpdate)
