@@ -10,6 +10,17 @@ CRAFTING_TYPES = {
 	{CRAFTING_TYPE_PROVISIONING,"provisioning"},
 	{CRAFTING_TYPE_WOODWORKING,"woodworking"} }
 
+SKILL_TYPES.EN = {
+	SKILL_TYPE_ARMOR="armor",
+	SKILL_TYPE_AVA="ava",
+	SKILL_TYPE_CLASS="class",
+	SKILL_TYPE_GUILD="guild",
+	SKILL_TYPE_NONE="none",
+	SKILL_TYPE_RACIAL="racial",
+	SKILL_TYPE_TRADESKILL="tradeskill",
+	SKILL_TYPE_WEAPON="weapon",
+	SKILL_TYPE_WORLD="world" }
+
 
 function CDGExperience_OnInitialized()
 	CDGExperience.currentXP = GetUnitXP('player')
@@ -83,7 +94,7 @@ function CDGExperience_SkillXPUpdate(eventCode, skillType, skillIndex, oldXP, ma
 		sType, sIndex = GetCraftingSkillLineIndices(tradeSkillType[1])
 		if sType == skillType and sIndex == skillIndex then
 			local XPgain = newXP - CDGExperience.craft.currentXP[tradeSkillType[1]]
-			d(string.format("%d crafting XP gained [%s.%s]",XPgain, tradeSkillType[2], sType ))
+			d(string.format("%d crafting XP gained [%s.%s]",XPgain, tradeSkillType[2], SKILL_TYPES.EN[sType] ))
 			CDGExperience.craft.currentXP[tradeSkillType[1]] = newXP
 		end
 	
