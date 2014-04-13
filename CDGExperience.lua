@@ -3,12 +3,12 @@ CDGExperience = {}
 CDGExperience.currentXP = 0
 
 CRAFTING_TYPES = { 
-	CRAFTING_TYPE_ALCHEMY,
-	CRAFTING_TYPE_BLACKSMITHING,
-	CRAFTING_TYPE_CLOTHIER,
-	CRAFTING_TYPE_ENCHANTING,
-	CRAFTING_TYPE_PROVISIONING,
-	CRAFTING_TYPE_WOODWORKING }
+	{CRAFTING_TYPE_ALCHEMY,"alchemy"},
+	{CRAFTING_TYPE_BLACKSMITHING,"blacksmithing"},
+	{CRAFTING_TYPE_CLOTHIER,"clothier"},
+	{CRAFTING_TYPE_ENCHANTING,"enchanting"},
+	{CRAFTING_TYPE_PROVISIONING,"provisioning"},
+	{CRAFTING_TYPE_WOODWORKING,"woodworking"} }
 
 
 function CDGExperience_OnInitialized()
@@ -17,10 +17,10 @@ function CDGExperience_OnInitialized()
 	for _, tradeSkillType in ipairs(CRAFTING_TYPES) do
 		if not CDGExperience.craft then CDGExperience.craft = {} end
 		if not CDGExperience.craft.currentXP then CDGExperience.craft.currentXP = {} end
-		if not CDGExperience.craft.currentXP[tradeSkillType] then CDGExperience.craft.currentXP[tradeSkillType] = {} end
+		if not CDGExperience.craft.currentXP[tradeSkillType[1]] then CDGExperience.craft.currentXP[tradeSkillType[1]] = {} end
 
-		skillType, skillIndex = GetCraftingSkillLineIndices(tradeSkillType)
-	  _, _, CDGExperience.craft.currentXP[tradeSkillType] = GetSkillLineXPInfo(skillType, skillIndex)
+		skillType, skillIndex = GetCraftingSkillLineIndices(tradeSkillType[1])
+	  _, _, CDGExperience.craft.currentXP[tradeSkillType[1]] = GetSkillLineXPInfo(skillType, skillIndex)
 	end
 	
 	EVENT_MANAGER:RegisterForEvent("CDGExperience",EVENT_SKILL_XP_UPDATE, CDGExperience_SkillXPUpdate)
@@ -80,11 +80,11 @@ function CDGExperience_SkillXPUpdate(eventCode, skillType, skillIndex, oldXP, ma
 
 	for _, tradeSkillType in ipairs(CRAFTING_TYPES) do
 
-		sType, sIndex = GetCraftingSkillLineIndices(tradeSkillType)
+		sType, sIndex = GetCraftingSkillLineIndices(tradeSkillType[1])
 		if sType == skillType and sIndex == skillIndex then
-			local XPgain = newXP - CDGExperience.craft.currentXP[tradeSkillType]
-			d(string.format("%d crafting XP gained [%s.%s]",XPgain, tradeSkillType, sType ))
-			CDGExperience.craft.currentXP[tradeSkillType] = newXP
+			local XPgain = newXP - CDGExperience.craft.currentXP[tradeSkillType[1]]
+			d(string.format("%d crafting XP gained [%s.%s]",XPgain, tradeSkillType[2], sType ))
+			CDGExperience.craft.currentXP[tradeSkillType[1]] = newXP
 		end
 	
 	end
