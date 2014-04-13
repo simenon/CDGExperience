@@ -41,7 +41,7 @@ function XPReasonToString(reason)
 	elseif reason == XP_REASON_FINESSE then sReason = "XP_REASON_FINESSE"
 	elseif reason == XP_REASON_KEEP_REWARD then sReason = "XP_REASON_KEEP"
 	elseif reason == XP_REASON_KILL then sReason = "for killing a mob"
-	elseif reason == XP_REASON_LOCK_PICK then sReason = "XP_REASON_LOCK_PICK"
+	elseif reason == XP_REASON_LOCK_PICK then sReason = "for lockpicking"
 	elseif reason == XP_REASON_MEDAL then sReason = "XP_REASON_MEDAL"
 	elseif reason == XP_REASON_NONE then sReason = "XP_REASON_NONE"
 	elseif reason == XP_REASON_OVERLAND_BOSS_KILL then sReason = "for killing an overland boss"
@@ -83,7 +83,7 @@ function CDGExperience_SkillXPUpdate(eventCode, skillType, skillIndex, oldXP, ma
 		sType, sIndex = GetCraftingSkillLineIndices(tradeSkillType)
 		if sType == skillType and sIndex == skillIndex then
 			local XPgain = newXP - CDGExperience.craft.currentXP[tradeSkillType]
-			d(string.format("%d crafting XP gained",XPgain))
+			d(string.format("%d crafting XP gained [%s.%s]",XPgain, tradeSkillType, sType ))
 			CDGExperience.craft.currentXP[tradeSkillType] = newXP
 		end
 	
