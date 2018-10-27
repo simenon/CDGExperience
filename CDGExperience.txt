@@ -1,4 +1,4 @@
-## Title: CDGMailReturn
+## Title: CDGExperience
 ## APIVersion: 100003
 
 CDGExperience.lua
